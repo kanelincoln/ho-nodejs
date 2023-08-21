@@ -11,9 +11,9 @@
 ```
 const { evolutionChain } = require('./index.js');
 ```
-3. You should now have access to the `evolutionChain` function. Run the `evolutionChain` function and pass in the name of a Pokémon (e.g. Rattata). Don't forget the `await` keyword (we are calling an asynchronous function):
+3. You should now have access to the `getEvolutionChain()` function. Run the `getEvolutionChain()` function and pass in the name of a Pokémon (e.g. Rattata). Don't forget the `await` keyword (we are calling an asynchronous function):
 ```
-await evolutionChain('rattata');
+await getEvolutionChain('rattata');
 ```
 
 ---

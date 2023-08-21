@@ -14,7 +14,7 @@ const createVariation = (evolutionList: QueryResponse): Variation => {
   return returnObj;
 };
 
-export const evolutionChain = (pokemonName: string): Promise<string | Error> => {
+export const getEvolutionChain = (pokemonName: string): Promise<string | Error> => {
   if (!pokemonName) throw new Error('Please enter the name of a Pokémon.');
 
   const q = `

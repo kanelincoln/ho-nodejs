@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { evolutionChain } from './index';
+import { getEvolutionChain } from './index';
 
 import { Variation } from './types.index';
 
@@ -7,16 +7,16 @@ const isError = (obj: string | Error): obj is Error => {
   return obj instanceof Error;
 }
 
-describe('evolutionChain()', (): void => {
+describe('getEvolutionChain()', (): void => {
   test('returns the initial evolutionary state of the Pokémon at the "top" level', async (): Promise<void> => {
-    const r: string | Error = await evolutionChain('caterpie');
+    const r: string | Error = await getEvolutionChain('caterpie');
     if (!isError(r)) {
       expect(JSON.parse(r).name).toBe('caterpie');
     }
   });
 
   test('returns the intermediary evolutionary state of the Pokémon at the "middle" level', async (): Promise<void> => {
-    const r: string | Error = await evolutionChain('caterpie');
+    const r: string | Error = await getEvolutionChain('caterpie');
 
     if (!isError(r)) {
       expect(JSON.parse(r).variations[0]?.name).toBe('metapod');
@@ -24,7 +24,7 @@ describe('evolutionChain()', (): void => {
   });
 
   test('returns the intermediary evolutionary state of the Pokémon at the "middle" level', async (): Promise<void> => {
-    const r: string | Error = await evolutionChain('rattata');
+    const r: string | Error = await getEvolutionChain('rattata');
 
     if (!isError(r)) {
       expect(JSON.parse(r).variations[0]?.name).toBe('raticate');
@@ -32,7 +32,7 @@ describe('evolutionChain()', (): void => {
   });
 
   test('returns the final evolutionary state of the Pokémon at the "bottom" level', async (): Promise<void> => {
-    const r: string | Error = await evolutionChain('caterpie');
+    const r: string | Error = await getEvolutionChain('caterpie');
 
     if (!isError(r)) {
       expect(JSON.parse(r).variations[0]?.variations[0]?.name).toBe('butterfree');
@@ -41,7 +41,7 @@ describe('evolutionChain()', (): void => {
 
   test('returns the correct number of variations', async (): Promise<void> => {
     const hasCorrectNumberOfEvolutions = async (name: string, n: number): Promise<boolean> => {
-      const r: string | Error = await evolutionChain(name);
+      const r: string | Error = await getEvolutionChain(name);
       let evCount: number = 0;
 
       const traverseVariation = (ev: Variation): void => {
@@ -71,7 +71,7 @@ describe('evolutionChain()', (): void => {
     const inputs: string[] = ['caterpie', 'Caterpie', 'cAtErPiE'];
 
     for (const input in inputs) {
-      const r: string | Error = await evolutionChain(input);
+      const r: string | Error = await getEvolutionChain(input);
       if (!isError(r)) expect(JSON.parse(r).name).toBe('caterpie');
     }
   });

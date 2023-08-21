@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.evolutionChain = void 0;
+exports.getEvolutionChain = void 0;
 var createVariation = function (evolutionList) {
     var returnObj = { name: evolutionList[0].name, variations: [] };
     while (evolutionList.length > 1) {
@@ -48,7 +48,7 @@ var createVariation = function (evolutionList) {
     }
     return returnObj;
 };
-var evolutionChain = function (pokemonName) {
+var getEvolutionChain = function (pokemonName) {
     if (!pokemonName)
         throw new Error('Please enter the name of a Pokémon.');
     var q = "\n    query samplePokeAPIquery($pokemonName: String!) {\n      pokemon_v2_pokemonspecies(where: { name: { _eq: $pokemonName } }) {\n        name\n        pokemon_v2_evolutionchain {\n          pokemon_v2_pokemonspecies {\n            name\n          }\n        }\n      }\n    }\n  ";
@@ -62,7 +62,7 @@ var evolutionChain = function (pokemonName) {
             variables: { pokemonName: pokemonName.toLowerCase() }
         })
     };
-    return fetch('https://beta.pokeapi.co/graphql/v1beta', qConfig)
+    return fetch('https://beta.pokeapi.co/graphql/v1beta', qConfig) // We'd usually use an address based on the environment (e.g. test, staging, production).
         .then(function (r) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, r.json()];
@@ -76,4 +76,4 @@ var evolutionChain = function (pokemonName) {
     })
         .catch(function (e) { return new Error(e); });
 };
-exports.evolutionChain = evolutionChain;
+exports.getEvolutionChain = getEvolutionChain;
