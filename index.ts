@@ -41,7 +41,7 @@ export const evolutionChain = (pokemonName: string): Promise<string | Error> => 
     })
   };
 
-  return fetch('https://beta.pokeapi.co/graphql/v1beta', qConfig) // We'd usually use an address based on the environment (e.g. test, staging, production).
+  return fetch('https://beta.pokeapi.co/graphql/v1beta', qConfig) // We'd ought to use an address based on the runtime environment (e.g. test, staging, production).
     .then(async (r: Response) => await r.json())
     .then((body: any) => {
       const d: QueryResponse = body.data.pokemon_v2_pokemonspecies[0].pokemon_v2_evolutionchain.pokemon_v2_pokemonspecies;
