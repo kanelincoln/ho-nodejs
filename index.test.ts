@@ -15,19 +15,11 @@ describe('getEvolutionChain()', (): void => {
     }
   });
 
-  test('returns the intermediary evolutionary state of the Pokémon at the "middle" level', async (): Promise<void> => {
+  test('if three evolutionary states, returns the intermediary evolutionary state of the Pokémon at the "middle" level', async (): Promise<void> => {
     const r: string | Error = await getEvolutionChain('caterpie');
 
     if (!isError(r)) {
       expect(JSON.parse(r).variations[0]?.name).toBe('metapod');
-    }
-  });
-
-  test('returns the intermediary evolutionary state of the Pokémon at the "middle" level', async (): Promise<void> => {
-    const r: string | Error = await getEvolutionChain('rattata');
-
-    if (!isError(r)) {
-      expect(JSON.parse(r).variations[0]?.name).toBe('raticate');
     }
   });
 
